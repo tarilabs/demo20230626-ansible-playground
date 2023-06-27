@@ -1,0 +1,19 @@
+- name: Empirically double-checking for list accessor
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+    myfact:
+      - 'a'
+      - 'b'
+      - 'c'
+
+  tasks:
+    # as expected "myfact[1]": "b"
+    - debug:
+        var: myfact[1]
+
+    # as expected "myfact[-1]": "c"
+    - debug:
+        var: myfact[-1]
