@@ -1,0 +1,39 @@
+- name: Empirically testing selectattr
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+    fruits:
+      - name: apple
+        color: red
+        nesting:
+          alphabet: vowel
+        nesting.alphabet: none
+      - name: banana
+        color: yellow
+        nesting.alphabet: none
+        nesting:
+          alphabet: consonant
+      - name: cherry
+        color: red
+        nesting:
+          alphabet: consonant
+        nesting.alphabet: none
+    myfact:
+      asd:
+        x:
+        - 0
+        - - 0
+          - 0
+          - a:
+            - b: 3.1415
+      id: 'Testcase #1'
+
+  tasks:
+    - debug:
+        var: myfact.asd["x"][1][2].a
+    - debug:
+        msg: "{{ myfact.asd['x'][1][2].a | selectattr('b', '==', 3.1415) }}"
+    - debug:
+        msg: '{{ fruits | selectattr("color", "==", "red") }}'
