@@ -4,6 +4,15 @@
   gather_facts: no
 
   vars:
+    myfact:
+      asd:
+        x:
+        - 0
+        - - 0
+          - 0
+          - a:
+            - b: 3.1415
+      id: 'Testcase #1'
     fruits:
       - name: apple
         color: red
@@ -20,15 +29,6 @@
         nesting:
           alphabet: consonant
         nesting.alphabet: none
-    myfact:
-      asd:
-        x:
-        - 0
-        - - 0
-          - 0
-          - a:
-            - b: 3.1415
-      id: 'Testcase #1'
 
   tasks:
     - debug:
@@ -37,3 +37,9 @@
         msg: "{{ myfact.asd['x'][1][2].a | selectattr('b', '==', 3.1415) }}"
     - debug:
         msg: '{{ fruits | selectattr("color", "==", "red") }}'
+    - debug:
+        msg: '{{ fruits | selectattr("nesting.alphabet", "==", "consonant") }}'
+    # has no attribute \"nesting['alphabet']\". :
+    - debug:
+        msg: '{{ fruits | selectattr("nesting[''alphabet'']", "==", "consonant") }}'
+
