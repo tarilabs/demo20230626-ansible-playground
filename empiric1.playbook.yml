@@ -39,7 +39,11 @@
         msg: '{{ fruits | selectattr("color", "==", "red") }}'
     - debug:
         msg: '{{ fruits | selectattr("nesting.alphabet", "==", "consonant") }}'
+        
     # has no attribute \"nesting['alphabet']\". :
-    - debug:
-        msg: '{{ fruits | selectattr("nesting[''alphabet'']", "==", "consonant") }}'
+    # - debug:
+    #     msg: '{{ fruits | selectattr("nesting[''alphabet'']", "==", "consonant") }}'
 
+    # has no attribute \"nesting['alph\". :
+    - debug:
+        msg: '{{ fruits | selectattr("nesting[''alph.abet'']", "==", "consonant") }}'
