@@ -32,3 +32,14 @@ ok: [localhost] => {
 ```
 
 as expected.
+
+using:
+https://github.com/tarilabs/demo20230626-ansible-playground/blob/817600a703748fe3bb1571110db901005afb584f/empiric1.playbook.yml#L42-L44
+
+results in:
+```
+TASK [debug] **********************************************************************************************************************************************************************
+fatal: [localhost]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'dict object' has no attribute \"nesting['alphabet']\". 'dict object' has no attribute \"nesting['alphabet']\"\n\nThe error appears to be in '/Users/mmortari/git/demo20230626-ansible-playground/empiric1.playbook.yml': line 43, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n    # has no attribute \\\"nesting['alphabet']\\\". :\n    - debug:\n      ^ here\n"}
+```
+
+so it would seems like, empirically, squared accessor is not supported in `selectattr`.
